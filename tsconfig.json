@@ -3,7 +3,6 @@
     "strict": true,
     "noImplicitAny": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["vitest/globals"],
     "jsx": "react-jsx",
     "baseUrl": ".",
     "paths": {
@@ -11,8 +10,5 @@
     }
   },
   "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+  "references": [{ "path": "./tsconfig.app.json" }, { "path": "./tsconfig.node.json" }]
 }
