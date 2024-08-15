@@ -1,5 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 
+import UncontrolledForm from '@/components/uncontrolledForm/UncontrolledForm';
 import Root from '@/routes/Root';
 import NotFound from '@/views/notFound/NotFound';
 
@@ -11,7 +12,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/uncontrolled-form',
-        element: <div>Uncontrolled Form</div>,
+        element: <UncontrolledForm />,
       },
       {
         path: '/react-hook-form',

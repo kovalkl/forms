@@ -1,0 +1,18 @@
+@import '@/styles/variable.sass'
+
+.button
+  display: flex
+  align-items: center
+  justify-content: center
+  padding: 12px 35px
+  background-color: $dark-color
+  color: $light-color
+  transition: background-color 0.3s
+
+  &:focus,
+  &:focus-visible
+    background-color: $accent-color
+
+  @media(hover: hover)
+    &:hover
+      background-color: $accent-color
