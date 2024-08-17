@@ -42,6 +42,7 @@ export default [
           patterns: ['.*'],
         },
       ],
+      '@typescript-eslint/no-explicit-any': 'error',
     },
   },
 ];
