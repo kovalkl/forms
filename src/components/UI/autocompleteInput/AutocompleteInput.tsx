@@ -7,31 +7,31 @@ export interface IAutocompleteInputProps extends InputHTMLAttributes<HTMLInputEl
   label: string;
   id: string;
   options: string[];
-  text: string | undefined;
+  value: string | undefined;
 }
 
 const AutocompleteInput = forwardRef<HTMLInputElement, IAutocompleteInputProps>(
-  ({ id, label, options, text, ...props }, ref) => {
-    const [inputValue, setInputValue] = useState(text || '');
+  ({ id, label, options, value = '', onChange, ...props }, ref) => {
+    const [inputValue, setInputValue] = useState(value);
     const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
 
     useEffect(() => {
-      setInputValue(text || '');
-    }, [text]);
+      setInputValue(value || '');
+    }, [value]);
 
     useEffect(() => {
-      if (inputValue) {
-        const filtered = options.filter((option) =>
-          option.toLowerCase().includes(inputValue.toLowerCase()),
-        );
-        setFilteredOptions(filtered);
-      } else {
-        setFilteredOptions(options);
-      }
+      setFilteredOptions(
+        inputValue
+          ? options.filter((option) => option.toLowerCase().includes(inputValue.toLowerCase()))
+          : options,
+      );
     }, [inputValue, options]);
 
     const handleOptionClick = (option: string) => {
       setInputValue(option);
+      if (onChange) {
+        onChange({ target: { value: option } } as React.ChangeEvent<HTMLInputElement>);
+      }
     };
 
     return (
@@ -43,7 +43,12 @@ const AutocompleteInput = forwardRef<HTMLInputElement, IAutocompleteInputProps>(
           id={id}
           ref={ref}
           value={inputValue}
-          onChange={(event) => setInputValue(event.target.value)}
+          onChange={(event) => {
+            setInputValue(event.target.value);
+            if (onChange) {
+              onChange(event);
+            }
+          }}
           {...props}
           className={`${baseStyles['text-input__input']} ${styles['autocomplete__input']}`}
         />

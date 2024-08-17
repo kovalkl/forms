@@ -1,0 +1,17 @@
+@import '@/styles/variable.sass'
+
+.checkbox
+  display: flex
+  align-items: center
+  gap: 10px
+  font-size: 0.9rem
+
+  &__input
+    appearance: none
+    width: 20px
+    height: 20px
+    border: 2px solid $dark-color
+    transition: background-color 0.3s
+
+    &:checked
+      background-color: $info-color

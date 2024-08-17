@@ -4,5 +4,7 @@ export type FormDataType = {
   gender: string;
   email: string;
   password: string;
+  country: string;
   confirmPassword: string;
+  terms: boolean;
 };
