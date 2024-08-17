@@ -1,0 +1,28 @@
+@import '@/styles/variable.sass'
+
+.autocomplete
+  position: relative
+  padding-bottom: 18px
+
+  &__options
+    display: none
+    position: absolute
+    top: 45px
+    right: 0
+    padding: 10px
+    width: 300px
+    max-height: 200px
+    background-color: $light-color
+    border: 2px solid $info-color
+    z-index: 2
+    overflow-y: scroll
+
+  &__input:focus ~ &__options
+    display: block
+
+  &__options-item
+    cursor: pointer
+
+    @media(hover: hover)
+      &:hover
+        color: $accent-color
