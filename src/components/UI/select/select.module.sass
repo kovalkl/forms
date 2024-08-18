@@ -1,38 +1,45 @@
 @import '@/styles/variable.sass'
 
-.select-container
+.select
   display: grid
   grid-template-columns: repeat(2, auto)
+  grid-template-rows: repeat(2, auto)
   align-items: center
   column-gap: 10px
-  padding-bottom: 18px
 
-.select-label
-  font-weight: 500
-  color: $info-color
+  &__label
+    font-weight: 500
+    color: $info-color
 
-.select-wrapper
-  position: relative
-  width: 300px
+  &__wrapper
+    position: relative
+    width: 300px
 
-.select-element
-  padding: 8px 0
-  width: 100%
-  border-bottom: 2px solid $dark-color
-  background-color: transparent
-  appearance: none
-  transition: border-bottom-color 0.3s
+  &__element
+    padding: 8px 0
+    width: 100%
+    border-bottom: 2px solid $dark-color
+    background-color: transparent
+    appearance: none
+    transition: border-bottom-color 0.3s
 
-  &:focus
-    border-bottom-color: $accent-color
+    &:focus
+      border-bottom-color: $accent-color
 
-.select-arrow
-  content: ''
-  position: absolute
-  right: 10px
-  top: 50%
-  transform: translateY(-50%)
-  border-left: 5px solid transparent
-  border-right: 5px solid transparent
-  border-top: 5px solid $dark-color
-  pointer-events: none
+  &__arrow
+    content: ''
+    position: absolute
+    right: 10px
+    top: 50%
+    transform: translateY(-50%)
+    border-left: 5px solid transparent
+    border-right: 5px solid transparent
+    border-top: 5px solid $dark-color
+    pointer-events: none
+
+  &__helper
+    min-height: 18px
+    max-width: 300px
+    grid-column-start: 2
+    font-size: 0.75rem
+    letter-spacing: 0.03rem

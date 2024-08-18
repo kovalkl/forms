@@ -21,6 +21,13 @@ export const schema = yup.object().shape({
     .string()
     .oneOf([yup.ref('password')], 'Passwords must match')
     .required(),
-  country: yup.string().oneOf(countries).required(),
-  terms: yup.bool().oneOf([true]).required(),
+  country: yup.string().oneOf(countries, 'Country must be selected of the list').required(),
+  terms: yup.bool().oneOf([true], 'Terms must be accepted').required(),
+  // image: yup
+  //   .mixed<File>()
+  //   .test('fileSize', 'File is too large', (value) => (value ? value.size <= 2000000 : true))
+  //   .test('fileType', 'Unsupported file format', (value) =>
+  //     value ? ['image/jpeg', 'image/png'].includes(value.type) : true,
+  //   )
+  //   .required(),
 });

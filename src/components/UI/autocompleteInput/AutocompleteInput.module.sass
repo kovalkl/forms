@@ -2,7 +2,6 @@
 
 .autocomplete
   position: relative
-  padding-bottom: 18px
 
   &__options
     display: none
@@ -26,3 +25,10 @@
     @media(hover: hover)
       &:hover
         color: $accent-color
+
+  &__helper
+    min-height: 18px
+    max-width: 300px
+    grid-column-start: 2
+    font-size: 0.75rem
+    letter-spacing: 0.03rem

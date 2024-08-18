@@ -7,11 +7,13 @@ This project is a form handling application built with React and TypeScript. The
 ## Features
 
 - **Three Routes**:
+
   - **Main Page**: Displays submitted data from both forms.
   - **Uncontrolled Form**: A form built with traditional uncontrolled components.
   - **React Hook Form**: A form using the React Hook Form library for live validation.
 
 - **Form Data Collection**:
+
   - **Name**: Validated for an initial uppercase letter.
   - **Age**: Must be a positive number.
   - **Email**: Standard email format validation.
@@ -22,11 +24,13 @@ This project is a form handling application built with React and TypeScript. The
   - **Country Autocomplete**: Select a country from a list stored in Redux.
 
 - **Validation**:
+
   - **Yup** is used for schema-based validation.
   - **Uncontrolled Form**: Validation occurs on submit.
   - **React Hook Form**: Live validation as you type.
 
 - **State Management**:
+
   - **Redux** is used to store form data and manage application state.
 
 - **User Experience**:

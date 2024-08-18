@@ -62,6 +62,7 @@ const ReactHookForm = () => {
         title="Gender"
         id="gender"
         options={['Male', 'Female', 'Prefer not to say']}
+        helperText={errors.gender?.message}
       />
       <Controller
         name="country"
@@ -73,6 +74,7 @@ const ReactHookForm = () => {
             options={countries}
             value={field.value || ''}
             onChange={(e) => field.onChange(e)}
+            helperText={errors.country?.message}
           />
         )}
       />
@@ -100,6 +102,7 @@ const ReactHookForm = () => {
         {...register('terms')}
         text="I accept the Terms and Conditions agreement"
         id="terms"
+        helperText={errors.terms?.message}
       />
       {/* <Controller
         name="image"

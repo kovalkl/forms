@@ -4,8 +4,8 @@ module.exports = {
   useTabs: false,
   semi: true,
   singleQuote: true,
-  endOfLine: "lf",
-  importOrder: ["^react(.*)", "@/(.*)", "^[./]"],
+  endOfLine: 'lf',
+  importOrder: ['^react(.*)', '@/(.*)', '^[./]'],
   importOrderSeparation: true,
-  plugins: ["@trivago/prettier-plugin-sort-imports"],
+  plugins: ['@trivago/prettier-plugin-sort-imports'],
 };

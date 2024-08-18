@@ -29,6 +29,19 @@ body
   flex-direction: column
   min-width: 320px
   min-height: 100vh
+  overflow-y: scroll
+
+  &::-webkit-scrollbar
+    width: 6px
+    background-color: $light-color
+
+  &::-webkit-scrollbar-thumb
+    border-radius: 10px
+    background-color: $info-color
+
+  &::-webkit-scrollbar-track
+    border-radius: 10px
+    background-color: $light-color
 
 h1
   font-size: 2em

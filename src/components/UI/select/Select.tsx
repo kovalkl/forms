@@ -6,21 +6,22 @@ interface ISelectProps extends SelectHTMLAttributes<HTMLSelectElement> {
   title: string;
   options: string[];
   id: string;
+  helperText?: string;
 }
 
 const Select = forwardRef<HTMLSelectElement, ISelectProps>(
-  ({ title, options, id, ...props }, ref) => {
+  ({ title, options, id, helperText, ...props }, ref) => {
     return (
-      <div className={styles['select-container']}>
-        <label htmlFor={id} className={styles['select-label']}>
+      <div className={styles['select']}>
+        <label htmlFor={id} className={styles['select__label']}>
           {title}
         </label>
-        <div className={styles['select-wrapper']}>
+        <div className={styles['select__wrapper']}>
           <select
             id={id}
             ref={ref}
             title={title}
-            className={styles['select-element']}
+            className={styles['select__element']}
             {...props}
             defaultValue={options[0]}
           >
@@ -30,8 +31,9 @@ const Select = forwardRef<HTMLSelectElement, ISelectProps>(
               </option>
             ))}
           </select>
-          <div className={styles['select-arrow']} />
+          <div className={styles['select__arrow']} />
         </div>
+        <span className={styles['select__helper']}>{helperText}</span>
       </div>
     );
   },

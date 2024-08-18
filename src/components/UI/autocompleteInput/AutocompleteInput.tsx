@@ -7,11 +7,12 @@ export interface IAutocompleteInputProps extends InputHTMLAttributes<HTMLInputEl
   label: string;
   id: string;
   options: string[];
-  value: string | undefined;
+  value?: string;
+  helperText?: string;
 }
 
 const AutocompleteInput = forwardRef<HTMLInputElement, IAutocompleteInputProps>(
-  ({ id, label, options, value = '', onChange, ...props }, ref) => {
+  ({ id, label, options, helperText, onChange, value = '', ...props }, ref) => {
     const [inputValue, setInputValue] = useState(value);
     const [filteredOptions, setFilteredOptions] = useState<string[]>([]);
 
@@ -65,6 +66,7 @@ const AutocompleteInput = forwardRef<HTMLInputElement, IAutocompleteInputProps>(
             ))}
           </ul>
         </div>
+        <span className={styles['autocomplete__helper']}>{helperText}</span>
       </div>
     );
   },
