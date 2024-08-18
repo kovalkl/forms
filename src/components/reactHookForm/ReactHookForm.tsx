@@ -1,11 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { useForm, Controller } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 import AutocompleteInput from '@/components/UI/autocompleteInput/AutocompleteInput';
 import BaseInput from '@/components/UI/baseInput/BaseInput';
 import Button from '@/components/UI/button/Button';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
+// import ImageInput from '@/components/UI/imageInput/ImageInput';
 import PasswordInput from '@/components/UI/passwordInput/PasswordInput';
 import Select from '@/components/UI/select/Select';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
@@ -13,11 +15,13 @@ import { useAppSelector } from '@/hooks/useAppSelector';
 import { FormDataType } from '@/models/types';
 import { addForm } from '@/store/formsSlice';
 import styles from '@/styles/Form.module.sass';
+// import { convertFileToBase64 } from '@/utils/convertFileToBase64';
 import { schema } from '@/utils/schema';
 
 const ReactHookForm = () => {
   const dispatch = useAppDispatch();
   const countries = useAppSelector((state) => state.countries.list);
+  const navigate = useNavigate();
 
   const {
     control,
@@ -31,9 +35,10 @@ const ReactHookForm = () => {
     mode: 'onChange',
   });
 
-  const onSubmitHandler = (data: FormDataType) => {
+  const onSubmitHandler = async (data: FormDataType) => {
     dispatch(addForm(data));
     reset();
+    navigate('/', { state: { success: true } });
   };
 
   return (
@@ -96,6 +101,19 @@ const ReactHookForm = () => {
         text="I accept the Terms and Conditions agreement"
         id="terms"
       />
+      {/* <Controller
+        name="image"
+        control={control}
+        render={({ field: { onChange, ref } }) => (
+          <ImageInput
+            label="Image"
+            id="image"
+            onChange={(file) => onChange(file)}
+            ref={ref}
+            error={errors.image?.message}
+          />
+        )}
+      /> */}
       <Button type="submit" disabled={!isValid}>
         Submit
       </Button>
