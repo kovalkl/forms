@@ -1,0 +1,25 @@
+@import '@/styles/variable.sass'
+
+.checkbox
+  display: grid
+  column-gap: 10px
+  align-items: center
+  max-width: 300px
+  font-size: 0.8rem
+
+  &__input
+    appearance: none
+    width: 20px
+    height: 20px
+    border: 2px solid $dark-color
+    transition: background-color 0.3s
+
+    &:checked
+      background-color: $info-color
+
+  &__helper
+    min-height: 18px
+    max-width: 300px
+    grid-column-start: 2
+    font-size: 0.75rem
+    letter-spacing: 0.03rem
