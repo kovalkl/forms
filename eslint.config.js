@@ -43,6 +43,9 @@ export default [
         },
       ],
       '@typescript-eslint/no-explicit-any': 'error',
+      'no-console': ['error', { allow: ['warn', 'error'] }],
+      'linebreak-style': ['error', 'unix'],
+      'no-inline-comments': 'error',
     },
   },
 ];

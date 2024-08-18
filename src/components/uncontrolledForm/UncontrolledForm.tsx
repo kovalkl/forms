@@ -7,6 +7,7 @@ import AutocompleteInput from '@/components/UI/autocompleteInput/AutocompleteInp
 import BaseInput from '@/components/UI/baseInput/BaseInput';
 import Button from '@/components/UI/button/Button';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
+import ImageInput from '@/components/UI/imageInput/ImageInput';
 import PasswordInput from '@/components/UI/passwordInput/PasswordInput';
 import Select from '@/components/UI/select/Select';
 import { getFieldValue } from '@/components/uncontrolledForm/getFieldValue';
@@ -15,6 +16,7 @@ import { useAppSelector } from '@/hooks/useAppSelector';
 import { FormDataType } from '@/models/types';
 import { addForm } from '@/store/formsSlice';
 import styles from '@/styles/Form.module.sass';
+import { convertFileToBase64 } from '@/utils/convertFileToBase64';
 import { schema } from '@/utils/schema';
 
 const UncontrolledForm = () => {
@@ -24,11 +26,23 @@ const UncontrolledForm = () => {
   const formRef = useRef<HTMLFormElement>(null);
 
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [imageFile, setImageFile] = useState<File | null>(null);
+
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setImageFile(file);
+    }
+  };
 
   const validateForm = () => {
     if (!formRef.current) return;
 
     const formData = new FormData(formRef.current);
+
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
 
     const data: FormDataType = {
       name: getFieldValue({ formData, key: 'name' }),
@@ -39,14 +53,15 @@ const UncontrolledForm = () => {
       password: getFieldValue({ formData, key: 'password' }),
       confirmPassword: getFieldValue({ formData, key: 'confirmPassword' }),
       terms: formData.get('terms') === 'on',
+      image: imageFile || null,
     };
 
     schema
       .validate(data, { abortEarly: false })
-      .then(() => {
+      .then(async () => {
         setErrors({});
         formRef.current?.reset();
-        dispatch(addForm(data));
+        dispatch(addForm({ ...data, image: await convertFileToBase64(imageFile!) }));
         navigate('/', { state: { success: true } });
       })
       .catch((err) => {
@@ -97,6 +112,7 @@ const UncontrolledForm = () => {
         name="terms"
         helperText={errors.terms}
       />
+      <ImageInput label="Image" id="image" helperText={errors.image} onChange={handleImageChange} />
       <Button type="submit">Submit</Button>
     </form>
   );

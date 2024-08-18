@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import type { FormDataType } from '@/models/types';
+import type { FormDataWithBase64 } from '@/models/types';
 
 type FormState = {
-  list: FormDataType[];
+  list: FormDataWithBase64[];
 };
 
 const initialState: FormState = {
@@ -14,7 +14,7 @@ const formsSlice = createSlice({
   name: 'forms',
   initialState,
   reducers: {
-    addForm(state, action: PayloadAction<FormDataType>) {
+    addForm(state, action: PayloadAction<FormDataWithBase64>) {
       state.list.push(action.payload);
     },
   },

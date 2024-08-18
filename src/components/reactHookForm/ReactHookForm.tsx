@@ -7,7 +7,7 @@ import AutocompleteInput from '@/components/UI/autocompleteInput/AutocompleteInp
 import BaseInput from '@/components/UI/baseInput/BaseInput';
 import Button from '@/components/UI/button/Button';
 import Checkbox from '@/components/UI/checkbox/Checkbox';
-// import ImageInput from '@/components/UI/imageInput/ImageInput';
+import ImageInput from '@/components/UI/imageInput/ImageInput';
 import PasswordInput from '@/components/UI/passwordInput/PasswordInput';
 import Select from '@/components/UI/select/Select';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
@@ -15,7 +15,7 @@ import { useAppSelector } from '@/hooks/useAppSelector';
 import { FormDataType } from '@/models/types';
 import { addForm } from '@/store/formsSlice';
 import styles from '@/styles/Form.module.sass';
-// import { convertFileToBase64 } from '@/utils/convertFileToBase64';
+import { convertFileToBase64 } from '@/utils/convertFileToBase64';
 import { schema } from '@/utils/schema';
 
 const ReactHookForm = () => {
@@ -36,7 +36,7 @@ const ReactHookForm = () => {
   });
 
   const onSubmitHandler = async (data: FormDataType) => {
-    dispatch(addForm(data));
+    dispatch(addForm({ ...data, image: await convertFileToBase64(data.image!) }));
     reset();
     navigate('/', { state: { success: true } });
   };
@@ -104,19 +104,24 @@ const ReactHookForm = () => {
         id="terms"
         helperText={errors.terms?.message}
       />
-      {/* <Controller
+      <Controller
         name="image"
         control={control}
         render={({ field: { onChange, ref } }) => (
           <ImageInput
             label="Image"
             id="image"
-            onChange={(file) => onChange(file)}
+            onChange={(event) => {
+              const file = event.target.files?.[0];
+              if (file) {
+                onChange(file);
+              }
+            }}
             ref={ref}
-            error={errors.image?.message}
+            helperText={errors.image?.message}
           />
         )}
-      /> */}
+      />
       <Button type="submit" disabled={!isValid}>
         Submit
       </Button>

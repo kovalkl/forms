@@ -2,6 +2,8 @@ import * as yup from 'yup';
 
 import { countries } from '@/utils/countries';
 
+const MAX_FILE_SIZE_BYTES = 1048576;
+
 export const schema = yup.object().shape({
   name: yup
     .string()
@@ -23,11 +25,20 @@ export const schema = yup.object().shape({
     .required(),
   country: yup.string().oneOf(countries, 'Country must be selected of the list').required(),
   terms: yup.bool().oneOf([true], 'Terms must be accepted').required(),
-  // image: yup
-  //   .mixed<File>()
-  //   .test('fileSize', 'File is too large', (value) => (value ? value.size <= 2000000 : true))
-  //   .test('fileType', 'Unsupported file format', (value) =>
-  //     value ? ['image/jpeg', 'image/png'].includes(value.type) : true,
-  //   )
-  //   .required(),
+  image: yup
+    .mixed<File>()
+    .test('fileSize', 'File must be 1 MB or smaller', (value) =>
+      value ? value.size <= MAX_FILE_SIZE_BYTES : true,
+    )
+    .test('fileType', 'Unsupported file format', (value) =>
+      value ? ['image/jpeg', 'image/png'].includes(value.type) : true,
+    )
+    .test('fileExtension', 'Only JPEG(JPG) and PNG formats', (value) => {
+      if (value) {
+        const fileExtension = value.name.split('.').pop()?.toLowerCase();
+        return ['jpeg', 'jpg', 'png'].includes(fileExtension || '');
+      }
+      return true;
+    })
+    .required(),
 });

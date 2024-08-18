@@ -1,6 +1,8 @@
 @import '@/styles/variable.sass'
 
 .image
+  display: flex
+  flex-direction: column
   &__label
     position: absolute
     width: 0
@@ -10,3 +12,9 @@
     overflow: hidden
     clip: rect(0, 0, 0, 0)
     border: 0
+
+  &__helper
+    min-height: 18px
+    max-width: 300px
+    font-size: 0.75rem
+    letter-spacing: 0.03rem

@@ -1,37 +1,38 @@
 import styles from '@/components/formItem/FormItem.module.sass';
-import { FormDataType } from '@/models/types';
+import { FormDataWithBase64 } from '@/models/types';
 
 type FormItemType = {
-  form: FormDataType;
+  form: FormDataWithBase64;
   isSuccess: boolean;
 };
 
 const FormItem = ({ form, isSuccess }: FormItemType) => {
   return (
     <li className={`${styles['form-item']} ${isSuccess ? styles['form-item_success'] : ''}`}>
-      <div className={styles['form-item__main-info']}>
-        <p>
+      <ul>
+        <li>
           <strong>Name:</strong> {form.name}
-        </p>
-        <p>
+        </li>
+        <li>
           <strong>Age:</strong> {form.age}
-        </p>
-        <p>
+        </li>
+        <li>
           <strong>Gender:</strong> {form.gender}
-        </p>
-      </div>
-      <p>
-        <strong>E-mail:</strong> {form.email}
-      </p>
-      <p>
-        <strong>Country:</strong> {form.country}
-      </p>
-      <p>
-        <strong>Password:</strong> {form.password}
-      </p>
-      <p>
-        <strong>Terms Accepted:</strong> {form.terms ? 'Yes' : 'No'}
-      </p>
+        </li>
+        <li>
+          <strong>E-mail:</strong> {form.email}
+        </li>
+        <li>
+          <strong>Country:</strong> {form.country}
+        </li>
+        <li>
+          <strong>Password:</strong> {form.password}
+        </li>
+        <li>
+          <strong>Terms Accepted:</strong> {form.terms ? 'Yes' : 'No'}
+        </li>
+      </ul>
+      <img className={styles['form-item__image']} src={form.image} alt={form.name} />
     </li>
   );
 };
